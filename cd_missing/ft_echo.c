@@ -6,7 +6,7 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 09:15:23 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/24 06:09:32 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/24 06:12:44 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,22 @@ void	ft_echo(char **argv)
 
 	if (!argv[1])
 		write(1, "\n", 1);
-	i = 1;
-	while (ft_is_nflag(argv[i]))
-		i++;
-	if (i == 1)
-		is_flag = 0;
 	else
-		is_flag = 1;
-	i--;
-	while (argv[++i])
 	{
-		ft_print_str(argv[i]);
-		write(1, " ", 1);
+		i = 1;
+		while (argv[i] && ft_is_nflag(argv[i]))
+			i++;
+		if (i == 1)
+			is_flag = 0;
+		else
+			is_flag = 1;
+		i--;
+		while (argv[++i])
+		{
+			ft_print_str(argv[i]);
+			write(1, " ", 1);
+		}
+		if (!is_flag)
+			write(1, "\n", 1);
 	}
-	if (!is_flag)
-		write(1, "\n", 1);
 }
