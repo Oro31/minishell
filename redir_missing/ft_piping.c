@@ -6,7 +6,7 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 09:15:23 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/26 05:32:34 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/26 06:36:17 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_piping(t_env **env, t_cmd **cmd)
 	int					status;
 	int					i;
 
-	action.sa_handler = ft_fork_handler;
+	action.sa_handler = ft_pipe_handler;
 	sigaction(SIGINT, &action, NULL);
 	sigaction(SIGQUIT, &action, NULL);
 	ret = 0;
