@@ -6,7 +6,7 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 12:33:23 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/26 05:11:15 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/26 06:36:40 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ struct	s_cmd
 
 void	ft_main_handler(int signum);
 void	ft_fork_handler(int signum);
+void	ft_pipe_handler(int signum);
 
 int		ft_is_alpha(char c);
 int		ft_is_digit(char c);
