@@ -6,7 +6,7 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 12:33:23 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/26 06:36:40 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/26 08:04:50 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		ft_unset(t_env **env, char *name);
 int		ft_hdl_arg_export(t_env **env, char **argv);
 int		ft_export(t_env **env, char *arg);
 int		ft_pwd(void);
-int		ft_exit(t_env **env, t_cmd **cmd, char **line, char *code);
+int		ft_exit(t_env **env, t_cmd **cmd, char *line, char **argv);
 int		ft_echo(char **argv);
 int		ft_hdl_arg_cd(t_env **env, char **argv);
 int		ft_cd(t_env **env, char *dir);

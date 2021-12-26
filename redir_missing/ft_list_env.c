@@ -6,7 +6,7 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 14:05:31 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/23 05:37:19 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/26 08:07:11 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,18 +96,21 @@ void	ft_free_list_env(t_env **list)
 {
 	t_env	*tmp;
 
-	if (*list)
+	if (list)
 	{
-		while (*list)
+		if (*list)
 		{
-			tmp = (*list)->nxt;
-			free((*list)->name);
-			free((*list)->value);
-			(*list)->name = NULL;
-			(*list)->value = NULL;
-			free(*list);
-			*list = NULL;
-			*list = tmp;
+			while (*list)
+			{
+				tmp = (*list)->nxt;
+				free((*list)->name);
+				free((*list)->value);
+				(*list)->name = NULL;
+				(*list)->value = NULL;
+				free(*list);
+				*list = NULL;
+				*list = tmp;
+			}
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 09:15:23 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/26 06:36:17 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/26 07:59:09 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	ft_exec_pipe(t_env **env, char **argv)
 	char	**env_p;
 	char	*path;
 
+	if (ft_is_builtin(argv[0]))
+		return (ft_exec_builtin(env, argv));
 	path = ft_get_env(*env, "PATH");
 	if (!path)
 		return (ft_print_ex_error("No such file or directory", argv[0]));

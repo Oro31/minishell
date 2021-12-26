@@ -6,7 +6,7 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 12:33:23 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/26 05:29:37 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/26 08:04:36 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	ft_prompt(t_env **env)
 		if (cmd->nxt)
 			g_exit_status = ft_piping(env, &cmd);
 		else if (ft_strcomp("exit", cmd->argv[0]) == 0)
-			g_exit_status = ft_exit(env, &cmd, &line, cmd->argv[1]);
+			g_exit_status = ft_exit(env, &cmd, line, cmd->argv);
 		else if (ft_is_builtin(cmd->argv[0]))
 			g_exit_status = ft_exec_builtin(env, cmd->argv);
 		else

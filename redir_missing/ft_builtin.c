@@ -6,7 +6,7 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 12:33:23 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/26 04:21:48 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/26 07:55:29 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	ft_is_builtin(char *exe)
 		return (1);
 	else if (ft_strcomp("echo", exe) == 0)
 		return (1);
+	else if (ft_strcomp("exit", exe) == 0)
+		return (1);
 	return (0);
 }
 
@@ -43,6 +45,8 @@ int	ft_exec_builtin(t_env **env, char **argv)
 		return (ft_pwd());
 	else if (ft_strcomp("echo", argv[0]) == 0)
 		return (ft_echo(argv));
+	else if (ft_strcomp("exit", argv[0]) == 0)
+		return (ft_exit(NULL, NULL, NULL, argv));
 	else
 		return (2);
 }

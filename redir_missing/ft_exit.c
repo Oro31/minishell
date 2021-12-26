@@ -6,7 +6,7 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 09:15:23 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/26 03:27:42 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/26 08:04:22 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,28 @@ int	ft_wrong_exit_arg(char *code)
 		return (0);
 }
 
-int	ft_exit(t_env **env, t_cmd **cmd, char **line, char *code)
+int	ft_exit(t_env **env, t_cmd **cmd, char *line, char **argv)
 {
 	write(1, "exit\n", 5);
-	if (!code)
+	if (!argv[1])
 		;
-	else if (ft_wrong_exit_arg(code))
+	else if (ft_wrong_exit_arg(argv[1]))
 	{
 		g_exit_status = 2;
 		write(2, "exit: ", 6);
-		write(2, code, ft_strlen(code));
+		write(2, argv[1], ft_strlen(argv[1]));
 		write(2, ": numeric argument required\n", 28);
 	}
+	else if (argv[2] != NULL)
+	{
+		g_exit_status = 1;
+		write(2, "exit: ", 6);
+		write(2, ": too many arguments\n", 21);
+		return (1);
+	}
 	else
-		g_exit_status = ft_atoi(code);
-	free(*line);
+		g_exit_status = ft_atoi(argv[1]);
+	free(line);
 	ft_free_list_cmd(cmd);
 	ft_free_list_env(env);
 	exit(g_exit_status);
