@@ -6,7 +6,7 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 09:15:23 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/26 05:37:18 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/26 08:32:49 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*ft_set_path(char *path, char *value)
 
 int	ft_print_ex_error(char *error, char *cmd)
 {
+	g_exit_status = 127;
 	write(2, cmd, ft_strlen(cmd));
 	write(2, ": ", 2);
 	write(2, error, ft_strlen(error));

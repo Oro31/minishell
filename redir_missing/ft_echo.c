@@ -6,7 +6,7 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 09:15:23 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/26 03:30:51 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/26 08:49:45 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,23 @@ static int	ft_is_nflag(char *arg)
 	return (0);
 }
 
+static int	ft_is_last_word(char **argv, int i)
+{
+	int	j;
+	int	k;
+
+	j = i;
+	while (argv[++j])
+	{
+		k = 0;
+		while (argv[j][k])
+			k++;
+		if (k > 0)
+			return (0);
+	}
+	return (1);
+}
+
 int	ft_echo(char **argv)
 {
 	int		is_flag;
@@ -49,7 +66,7 @@ int	ft_echo(char **argv)
 		while (argv[++i])
 		{
 			ft_print_str(argv[i]);
-			if (argv[i][0] != '\0')
+			if (argv[i][0] != '\0' && !ft_is_last_word(argv, i))
 				write(1, " ", 1);
 		}
 		if (!is_flag)
