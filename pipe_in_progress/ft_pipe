@@ -1,0 +1,70 @@
+#include "parsing.h"
+
+void	execute_piping(t_cmd *cmd, char *cmd_path, int nb_pipe, t_env *env)
+{
+	char	**env_tab;
+	int		*pipefds;
+	int		status;
+	int		i;
+	int		j;
+	pid_t	pid;
+
+	if (!ft_safe_malloc_splint(&pipefds, nb_pipe))
+		exit(EXIT_FAILURE);
+	i = -1;
+	while (++i < nb_pipe)
+	{
+		if (pipe(pipefds + (i * 2)) < 0)
+		{
+			perror("pipe failed");
+			exit(EXIT_FAILURE);
+		}
+	}
+	j = 0;
+	while (cmd)
+	{
+		if (ft_set_execve_args(&cmd_path, &env_tab))
+			ft_exit("set execve args failed");
+		pid = fork();
+		if (!pid)
+		{
+			if (cmd->nxt)
+			{
+				if (dup2(pipefds[j + 1], 1) < 0)
+				{
+					perror("dup2 failed");
+					exit(EXIT_FAILURE);
+				}
+			}
+			if (j != 0)
+			{
+				if (dup2(pipefds[j - 2], 0) < 0)
+				{
+					perror("dup2 failed");
+					exit(EXIT_FAILURE);
+				}
+			}
+			i = -1;
+			while (++i < (2 * nb_pipe))
+				close(pipefds[i]);
+			if (execve(cmd_path, cmd->argv, envp) < 0)
+			{
+				perror(cmd->argv[0]);
+				exit(EXIT_FAILURE);
+			}
+		}
+		else if (pid < 0)
+		{
+			perror("error pid");
+			exit(EXIT_FAILURE);
+		}
+		cmd = cmd->nxt;
+		j += 2;
+	}
+	i = -1;
+	while (++i < nb_pipe * 2)
+		close(pipefds[i]);
+	i = -1;
+	while (++i < nb_pipe + 1)
+		wait(&status);
+}
